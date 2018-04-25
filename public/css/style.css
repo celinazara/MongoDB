@@ -1,0 +1,41 @@
+body{
+    background: url('../img/newspaper.jpg');
+    background-size: 600px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.articleBody {
+    height: 200px;
+    font-size: 20px;
+    overflow-y: scroll;
+    line-height: 150%;
+}
+
+#nameComment {
+    font-weight: bold;
+    background: #a5d6a7;
+    color: white;
+}
+
+/* label color */
+
+.input-field input[type=text]:focus + label {
+    color: #2e7d32;
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #2e7d32;
+    box-shadow: 0 1px 0 0 #000;
+}
+
+.input-field .prefix.active {
+    color: #a5d6a7;
+}
