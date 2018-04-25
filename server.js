@@ -8,7 +8,7 @@ var express = require('express');
 var app = express();
 
 app.use(logger('dev'));
-appuse(bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: false
 }));
 

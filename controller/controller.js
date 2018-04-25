@@ -8,12 +8,12 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 //Require models
-var Comment = require('../models/comment.js');
-var Article = require('../models/article.js');
+var comment = require('../models/comment.js');
+var article = require('../models/article.js');
 
 //index
 router.get('/', function (req, res) {
-    res.redirect('/articles');
+    res.redirect('/article');
 });
 
 
@@ -43,12 +43,12 @@ router.get('/scrape', function (req, res) {
                     titlesArray.push(result.title);
 
                     // only add the article if is not already there
-                    Article.count({ title: result.title }, function (err, test) {
+                    article.count({ title: result.title }, function (err, test) {
                         //if the test is 0, the entry is unique and good to save
                         if (test == 0) {
 
                             //using Article model, create new object
-                            var entry = new Article(result);
+                            var entry = new article(result);
 
                             //save entry to mongodb
                             entry.save(function (err, doc) {
@@ -79,7 +79,7 @@ router.get('/scrape', function (req, res) {
 });
 
 //this will grab every article an populate the DOM
-router.get('/articles', function (req, res) {
+router.get('/article', function (req, res) {
     //allows newer articles to be on top
     article.find().sort({ _id: -1 })
         //send to handlebars
@@ -94,7 +94,7 @@ router.get('/articles', function (req, res) {
 });
 
 // This will get the articles we scraped from the mongoDB in JSON
-router.get('/articles-json', function (req, res) {
+router.get('/article-json', function (req, res) {
     article.find({}, function (err, doc) {
         if (err) {
             console.log(err);
@@ -114,7 +114,7 @@ router.get('/clearAll', function (req, res) {
         }
 
     });
-    res.redirect('/articles-json');
+    res.redirect('/article-json');
 });
 
 router.get('/readarticle/:id', function (req, res) {
